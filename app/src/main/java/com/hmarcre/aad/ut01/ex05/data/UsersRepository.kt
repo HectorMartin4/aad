@@ -31,7 +31,7 @@ class UsersRepository(
 
     fun removeUser (userId: Int){
 
-        var user = localSource.findById(userId)
+        localSource.remove(userId)
 
     }
 
