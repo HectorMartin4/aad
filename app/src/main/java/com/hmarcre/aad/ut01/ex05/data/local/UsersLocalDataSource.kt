@@ -25,17 +25,16 @@ class UsersLocalDataSource(val sharedPref:SharedPreferences) {
 
     fun getUsers(): List<User>{
         val userList = mutableListOf<User>()
-        sharedPref.all.forEach { entry ->
-            val users = gson.fromJson(entry.value as String, User::class.java)
+        sharedPref.all.forEach { map ->
+            val users = gson.fromJson(map.value as String, User::class.java)
             userList.add(users)
         }
         return userList
     }
 
     fun findById(userId: Int): User{
-        val gson = Gson()
 
-        val jsonUsers = sharedPref.getString(userId.toString(), "")
+        val jsonUsers = sharedPref.getString(userId.toString(), null)
 
         return gson.fromJson(jsonUsers, User::class.java)
 
